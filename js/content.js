@@ -58,26 +58,7 @@
     'Saving {50} a day adds up to {18250} in a year! 😮',
   ];
 
-  // Shown when the daily treasure chest opens.
-  CQ.FACTS = [
-    'The first coins were made more than 2,500 years ago! 🏺',
-    'Some of the first paper money came from China, about 1,000 years ago. 📜',
-    'A budget is just a plan for your money. 📝',
-    'Compound interest makes savings grow faster the longer you leave them. 🌱',
-    'Waiting 48 hours before buying stops lots of impulse buys. ⏳',
-    'Saving a little every week beats saving a lot once in a while. 🐢',
-    'Interest is the bank paying YOU to keep your money with them. 🏦',
-    'Writing down what you spend is the #1 habit of money pros. 🔍',
-    '“Need” or “want”? Asking that one question saves lots of money. 🤔',
-    'A share is a tiny piece of a company. Own one and you\'re part-owner! 🏢',
-    'Rule of 72: divide 72 by the yearly return to see how long money takes to double. 📐',
-    'Inflation means prices slowly go up, so money that just sits still buys a little less each year. 🎈',
-    'Don\'t put all your eggs in one basket — spreading money out is called diversifying. 🧺',
-    'If something promises to double your money fast, it\'s almost always a scam. 🚩',
-    'Starting to save and invest early is a superpower: time makes money grow. ⏰',
-  ];
-
-  // Money points: short financial tips, shown on tappable cards in each section and in the Tip Vault.
+  // Money points: short financial tips, shown on tappable cards in each section and in Midas's Golden Rules.
   // {n} = an amount in rupees, shown in the chosen currency.
   CQ.POINT_SECTIONS = [
     { key: 'home', label: 'Money basics', emoji: '💎' },
@@ -243,7 +224,7 @@
     ],
   };
 
-  // Short "quick points", shown as chips at the bottom of the Tip Vault.
+  // Short "quick points", shown as chips at the bottom of Midas's Golden Rules.
   CQ.QUICK = ['Save first, spend later 🫙', 'Needs before wants ✅', 'Small buys add up 🍬', 'Time grows money ⏰', 'Spread your eggs 🧺',
     'Fees eat growth 🍪', 'Wait 48 hours ⏳', 'Never share your OTP 🔒', 'Compare 3 prices 🔎', 'Budget = a plan 📝', 'Keep rainy-day money ☔',
     'Interest pays you 🏦', 'Too good = scam 🚩', 'Track every coin 🔍', 'Ask before you buy 👪', 'Pay yourself first 💰', 'Think long term 📈',

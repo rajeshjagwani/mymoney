@@ -1,5 +1,5 @@
 /* MyMoney — the playful bits: sounds & buzz, count-up numbers, mascot pokes,
-   daily treasure chest, tap-to-drop coins into a jar, and the guided tour. */
+   tap-to-drop coins into a jar, and the guided tour. */
 (function () {
   const CQ = window.CQ;
   const A = CQ.actions;
@@ -82,7 +82,7 @@
     wrong: () => { tone(220, 0, 0.18, 'sawtooth', 0.05, 180); tone(185, 0.16, 0.25, 'sawtooth', 0.05, 140); },
     // Level-up fanfare
     levelup: () => { [523, 659, 784].forEach((f, i) => tone(f, i * 0.1, 0.18, 'square', 0.05)); [1047, 1319, 1568].forEach((f) => tone(f, 0.32, 0.6, 'triangle', 0.07)); jingle(0.35, 5, 0.025); },
-    // Sparkly magic (badges, treasure chest)
+    // Sparkly magic (badges)
     magic: () => { [1047, 1319, 1568, 2093, 2637].forEach((f, i) => tone(f, i * 0.06, 0.35, 'sine', 0.07)); noise(0, 0.5, 0.05, 6000, 9000, 'highpass'); },
     // Big win (goal complete, guide done)
     win: () => { [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.09, 0.25, 'triangle', 0.1)); bell(0.36, 2093, 0.08, 0.7); },
@@ -142,7 +142,7 @@
 
   /* ---------- Tap effects: every button pops, glows and (for the big ones) bursts coins ---------- */
   const TAP_SEL = 'button, .btn, a.card, .tile, .world-card, .chip, .tab, .seg a, .bottomnav a, .lesson-item, .notice, .req-card, .wallet-card, .cat-chip';
-  const BURST_SEL = '.btn-primary, .btn-green, .btn-coral, .btn-blue, .btn-purple, .coin, .group-btn, .age-btn, .chest, .world-card, [data-act="random-tip"]';
+  const BURST_SEL = '.btn-primary, .btn-green, .btn-coral, .btn-blue, .btn-purple, .coin, .group-btn, .age-btn, .world-card, [data-act="random-tip"]';
   function tapRing(x, y, big) {
     const r = document.createElement('span');
     r.className = 'tap-ring' + (big ? ' big' : '');
@@ -207,7 +207,7 @@
     const i = CQ.tipIdx[sec];
     return '<section class="card tip-card"><div class="tip-head"><b>💡 Money point</b><span class="tiny muted tip-count">' + (i + 1) + ' / ' + list.length + '</span>' +
       '<button type="button" class="btn btn-primary btn-small" data-act="next-tip" data-sec="' + sec + '" data-quiet="1">Next →</button></div>' +
-      '<p class="tip-text">' + esc(CQ.fill(list[i])) + '</p><a class="tip-more" href="#/tips?c=' + sec + '">See all ' + list.length + ' tips in the Tip Vault →</a></section>';
+      '<p class="tip-text">' + esc(CQ.fill(list[i])) + '</p><a class="tip-more" href="#/tips?c=' + sec + '">See all ' + list.length + ' tips in Midas\'s Golden Rules →</a></section>';
   };
   A['next-tip'] = function (el, e) {
     const sec = el.dataset.sec, list = CQ.POINTS[sec], card = el.closest('.tip-card');
@@ -220,16 +220,16 @@
     CQ.markTip(sec, CQ.tipIdx[sec], e && e.clientX, e && e.clientY);
   };
 
-  /* Quick points: short tips shown as a still (not scrolling) set of chips in the Tip Vault */
+  /* Quick points: short tips shown as a still (not scrolling) set of chips in Midas's Golden Rules */
   CQ.quickPoints = function () {
     return '<section class="card"><h3>⚡ Quick points</h3><div class="quick-cloud">' + CQ.QUICK.map((q) => '<span>' + esc(q) + '</span>').join('') + '</div></section>';
   };
 
-  /* ---------- Tip Vault: every tip, by topic ---------- */
+  /* ---------- Midas's Golden Rules: every tip, by topic ---------- */
   const allTips = () => CQ.POINT_SECTIONS.reduce((n, s) => n + (CQ.POINTS[s.key] || []).length, 0);
   CQ.routes.tips = function (p) {
     const c = CQ.child(), read = c.tipsRead || [], cat = CQ.POINT_SECTIONS.some((s) => s.key === p.c) ? p.c : 'all', total = allTips();
-    let body = '<section class="card vault-hero"><div class="big-emoji">💡</div><h2>The Tip Vault</h2><p class="muted">' + total + ' money tips. Tap one to mark it read and earn XP!</p>' +
+    let body = '<section class="card vault-hero"><div class="big-emoji">💡</div><h2>Midas\'s Golden Rules</h2><p class="muted">' + total + ' money tips. Tap one to mark it read and earn XP!</p>' +
       CQ.progress(Math.round((read.length / total) * 100), 'green') + '<p class="tiny muted" id="vault-count">' + read.length + ' of ' + total + ' read</p>' +
       '<button class="btn btn-purple btn-big btn-block" data-act="random-tip">🎲 Surprise me with a tip!</button></section>' +
       '<nav class="cat-row" aria-label="Tip topics"><a class="cat-chip' + (cat === 'all' ? ' active' : '') + '" href="#/tips">✨ All</a>' +
@@ -243,7 +243,7 @@
         }).join('') + '</div>';
     });
     if (cat === 'all') body += CQ.quickPoints();
-    return CQ.shell(body, { back: 'home', tab: 'learn', title: '💡 Tip Vault' });
+    return CQ.shell(body, { back: 'home', tab: 'learn', title: '💡 Midas\'s Golden Rules' });
   };
   function updateVaultCount() {
     const c = CQ.child(), total = allTips(), n = (c.tipsRead || []).length, el = document.getElementById('vault-count');
@@ -272,34 +272,6 @@
       '<button class="btn btn-ghost btn-block" data-act="close-modal">Got it</button></div></div>', 'modal-tip');
     CQ.sfx('pop'); CQ.confetti();
     updateVaultCount();
-  };
-
-  /* ---------- Daily treasure chest ---------- */
-  CQ.chestCard = function (c) {
-    if (c.lastChest === CQ.today()) return '';
-    return '<section class="card chest-card"><button class="chest" data-act="open-chest" data-quiet="1" aria-label="Open today\'s treasure chest">🎁</button>' +
-      '<div><h3>Daily treasure!</h3><p class="muted" style="margin:0">' + CQ.t('Tap the present to open it!', 'Tap to open today\'s bonus.') + '</p></div></section>';
-  };
-  A['open-chest'] = function (el) {
-    const c = CQ.child();
-    if (c.lastChest === CQ.today()) return;
-    c.lastChest = CQ.today();
-    CQ.save();
-    const xp = 5 + 5 * Math.floor(Math.random() * 3);
-    const fact = CQ.fill(CQ.FACTS[Math.floor(Math.random() * CQ.FACTS.length)]);
-    el.classList.add('opening');
-    el.disabled = true;
-    CQ.sfx('magic'); CQ.buzz([20, 30, 20]);
-    setTimeout(() => {
-      const card = el.closest('.chest-card');
-      if (card) {
-        card.classList.add('opened');
-        card.innerHTML = '<div class="chest open" aria-hidden="true">✨</div><div><h3>+' + xp + ' XP!</h3><p style="margin:0">' + esc(fact) + '</p></div>';
-      }
-      CQ.confetti();
-      CQ.addXP(c, xp, 'daily treasure');
-      CQ.save();
-    }, reduced() ? 0 : 750);
   };
 
   /* ---------- Tap coins to drop them into a goal jar ---------- */
@@ -378,7 +350,6 @@
     { sel: '.wallet .wallet-main', t: 'This is your wallet 💰 — the money you can spend right now.' },
     { sel: '.wallet a.wallet-card', t: 'Money you save goes into jars 🫙 so you don\'t spend it by accident.' },
     { sel: '.quick', t: 'Got money, or spent some? Tap these to write it down. ✍️' },
-    { sel: '.chest-card', t: 'Open a treasure chest every day for bonus XP! 🎁' },
     { sel: '.world-card.w1', t: 'Track: see where all your money went — with charts! 📊' },
     { sel: '.world-card.w2', t: 'Save: save up for something you really want. 🫙' },
     { sel: '.world-card.w3', t: 'Decide: want to buy something? Do a quick Think First check, then ask your parents! 🛍️' },
@@ -415,7 +386,7 @@
       '<div class="tour-spot" style="top:' + (r.top - pad) + 'px;left:' + (r.left - pad) + 'px;width:' + (r.width + pad * 2) + 'px;height:' + (r.height + pad * 2) + 'px"></div>' +
       '<div class="tour-tip" role="dialog" aria-live="polite" style="' + tipPos + '"><div class="tour-face" aria-hidden="true">' + CQ.goldsworth() + '</div><p>' + text + '</p>' +
       '<div class="tour-row"><button class="link-btn" data-act="tour-end">Skip tour</button><span class="tiny muted">' + (tour.i + 1) + ' / ' + tour.steps.length + '</span>' +
-      '<button class="btn btn-primary btn-small" data-act="tour-next" data-quiet="1" autofocus>' + (last ? 'Let\'s play! 🚀' : 'Next →') + '</button></div></div>';
+      '<button class="btn btn-primary btn-small" data-act="tour-next" data-quiet="1" autofocus>' + (last ? 'Let\'s start! 🚀' : 'Next →') + '</button></div></div>';
     const btn = root.querySelector('[autofocus]');
     if (btn) btn.focus();
     CQ.sfx('pop');

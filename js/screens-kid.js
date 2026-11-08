@@ -23,11 +23,11 @@
   CQ.reqPic = reqPic; CQ.statusPill = statusPill;
 
   function askTitle() { return W.ask.title; }
-  // Big link card to the Tip Vault, showing how many tips you've read.
+  // Big link card to Midas's Golden Rules, showing how many tips you've read.
   function vaultLink() {
     const c = kid(), n = (c.tipsRead || []).length;
     const total = CQ.POINT_SECTIONS.reduce((t, s) => t + (CQ.POINTS[s.key] || []).length, 0);
-    return '<a class="card vault-link" href="#/tips"><span class="vl-emoji">💡</span><span><b>Tip Vault</b><br><span class="muted">' + total + ' money tips · ' + n + ' read</span></span><span class="vl-go">Open →</span></a>';
+    return '<a class="card vault-link" href="#/tips"><span class="vl-emoji">💡</span><span><b>Midas\'s Golden Rules</b><br><span class="muted">' + total + ' money tips · ' + n + ' read</span></span><span class="vl-go">Open →</span></a>';
   }
   CQ.vaultLink = vaultLink;
 
@@ -60,7 +60,6 @@
       '<div class="quick"><a class="btn btn-green btn-big" href="#/spend/in">＋ ' + CQ.t('Money in', 'Add income') + '</a>' +
       '<a class="btn btn-coral btn-big" href="#/spend/out">－ ' + CQ.t('I spent', 'Log a spend') + '</a></div>' +
       news +
-      CQ.chestCard(c) +
       CQ.mascot('🦉', tip) +
       '<h2 class="section-title">' + CQ.t('Your three quests', 'Track, save & decide') + '</h2>' +
       '<div class="worlds">' +
@@ -745,7 +744,7 @@
     let body = CQ.mascot('🦉', CQ.t('Mini lessons take 2 minutes. Finish the quiz to earn XP! ⭐', '2-minute lessons with a 3-question quiz. XP for every right answer.')) +
       '<a class="card guide-card" href="#/learn/guide"><span class="guide-emoji">📘</span><span><b>The Money Guide</b><br><span class="muted">How to save and invest, step by step — with a growth calculator</span>' +
       CQ.progress(Math.round((guideDone / GUIDE.length) * 100), 'green') + '<span class="tiny muted">' + guideDone + ' of ' + GUIDE.length + ' steps done</span></span></a>' +
-      vaultLink() + CQ.tipCard('learn');
+      vaultLink();
     ['spend', 'save', 'ask', 'invest'].forEach((w) => {
       const wd = W[w];
       body += '<h2 class="section-title">' + wd.mascot + ' ' + wd.label + ': ' + wd.title + '</h2><div class="lesson-list">' +
@@ -904,7 +903,7 @@
       CQ.BADGES.map((b) => { const got = CQ.hasBadge(c, b.id); return '<div class="badge' + (got ? '' : ' locked') + '"><span class="b-emoji">' + (got ? b.emoji : '🔒') + '</span><strong>' + b.name + '</strong><small>' + b.desc + '</small></div>'; }).join('') +
       '</div></section>' +
       '<section class="card"><h3>⚡ How to earn XP</h3><ul class="xp-list">' +
-      [['Add money or log a buy', 5], ['Put money in a goal jar', 10], ['Make a new goal', 15], ['Finish Think First', 15], ['Skip a buy you don\'t need', 20], ['Each right lesson answer', 10], ['Reach a goal milestone', 15], ['Open the daily treasure', '5–15'], ['Read a new money tip', 2]]
+      [['Add money or log a buy', 5], ['Put money in a goal jar', 10], ['Make a new goal', 15], ['Finish Think First', 15], ['Skip a buy you don\'t need', 20], ['Each right lesson answer', 10], ['Reach a goal milestone', 15], ['Read a new money tip', 2]]
         .map(([t, x]) => '<li><span>' + t + '</span><span class="pill purple">+' + x + ' XP</span></li>').join('') + '</ul></section>' + CQ.tipCard('home');
     return CQ.shell(body, { tab: 'home', back: 'home', title: '🏅 My rewards' });
   };

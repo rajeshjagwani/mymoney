@@ -488,13 +488,6 @@ body.mode-teen .mascot-face { width: 44px; }
 .buycheck .stack { width: 100%; margin-top: 6px; }
 .buy-summary { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; width: 100%; padding: 12px 14px; border-radius: 16px; background: var(--sun-l); font-weight: 700; }
 
-/* ---------- Daily treasure chest ---------- */
-.chest-card { display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #FFF3D6, #FFE1F0); border-color: #F9CFE3; }
-.chest { flex: none; font-size: 52px; line-height: 1; background: none; border: 0; padding: 0; cursor: pointer; animation: chestIdle 1.6s ease-in-out infinite; }
-.chest.opening { animation: chestOpen .75s ease-in-out; }
-.chest.open { animation: bounceIn .5s cubic-bezier(.2, 1.6, .4, 1); }
-@keyframes chestIdle { 0%, 70%, 100% { transform: rotate(0); } 75% { transform: rotate(-10deg); } 85% { transform: rotate(10deg); } 95% { transform: rotate(-4deg); } }
-@keyframes chestOpen { 20% { transform: rotate(-15deg) scale(1.1); } 40% { transform: rotate(15deg) scale(1.15); } 60% { transform: rotate(-15deg) scale(1.2); } 100% { transform: scale(1.6); opacity: 0; } }
 
 /* ---------- Coins you tap into the jar ---------- */
 .coin-tray-wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
@@ -735,8 +728,6 @@ body.mode-teen .hero { background: linear-gradient(135deg, #1E1B4B 0%, #3730A3 5
 .tip-card::after { content: '✨'; position: absolute; right: 12px; bottom: 6px; font-size: 26px; opacity: .35; animation: twinkle 2.4s ease-in-out infinite; }
 @keyframes twinkle { 50% { transform: scale(1.25) rotate(15deg); opacity: .7; } }
 .guide-card { box-shadow: 0 16px 30px -18px rgba(109, 74, 255, .6); }
-.chest-card { animation: glow 2.6s ease-in-out infinite; }
-@keyframes glow { 50% { box-shadow: 0 0 0 4px rgba(255, 194, 51, .35), 0 16px 30px -16px rgba(255, 93, 162, .5); } }
 .mascot-face { filter: drop-shadow(0 6px 8px rgba(120, 80, 0, .25)); }
 .bubble { background: linear-gradient(180deg, #FFFFFF, #FFFBF0); }
 
@@ -807,7 +798,7 @@ body.mode-teen .hero { background: linear-gradient(135deg, #1E1B4B 0%, #3730A3 5
 .mascot-face:hover { transform: rotate(-6deg) scale(1.06); }
 :focus-visible { outline: 3px solid #FF5DA2; outline-offset: 3px; border-radius: 12px; }
 
-/* ---------- Tip cards, quick points & Tip Vault ---------- */
+/* ---------- Tip cards, quick points & Midas's Golden Rules ---------- */
 .tip-more { display: inline-block; margin-top: 8px; font-weight: 800; font-size: .85em; color: #B45309; text-decoration: none; }
 .tip-more:hover { text-decoration: underline; }
 .quick-cloud { display: flex; flex-wrap: wrap; gap: 8px; }

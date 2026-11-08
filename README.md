@@ -37,17 +37,17 @@ A short guided tour then points out each part of the home screen. You can replay
 - **📘 Money Guide:** 10 steps on how to save and invest (earn, track, plan, save first, rainy-day money, think before buying, use a bank, invest for the long run, avoid traps, give). Each step can be ticked off, and there's an investing calculator showing money put in vs growth.
 - **💡 Money tips:** 135 tips in 8 topics (money basics, spending, saving, asking, investing, earning, banking, staying safe), plus 30 quick points.
   - Most screens have a tip card. Tap *Next* for another.
-  - The 30 quick points are listed at the bottom of the Tip Vault.
-  - The **Tip Vault** (`#/tips`) lists every tip by topic, with a 🎲 *Surprise me* button. Each new tip read gives +2 XP, and 30 tips earns the 💡 Tip Master badge.
+  - The 30 quick points are listed at the bottom of Midas's Golden Rules.
+  - **Midas's Golden Rules** (`#/tips`) lists every tip by topic, with a 🎲 *Surprise me* button. Each new tip read gives +2 XP, and 30 tips earns the 💡 Tip Master badge.
   - Edit the tips in `CQ.POINTS` and `CQ.QUICK` in `js/content.js`.
 - **Celebrations:** milestones, badges, level-ups and every 3-star lesson quiz rain money (💵 💰 🪙 💸 💎) down the screen.
 - **Sounds** (made in code, no audio files; turn off in ⚙️ Settings, which also has a board to try each one):
   - **KA-CHING!** cash register when you add money, get 3 stars on a quiz, fill a goal, or skip a buy and keep your money.
   - Coin clink into the jar, coins pouring when you save, a whoosh when you spend.
-  - Ding / bwomp for right and wrong quiz answers, a level-up fanfare, a sparkle for badges and the treasure chest, and coins jingling with the money rain.
+  - Ding / bwomp for right and wrong quiz answers, a level-up fanfare, a sparkle for badges, and coins jingling with the money rain.
 - **Tap effects:** every button and card bounces with a glowing ring when tapped. Main buttons also burst coins and sparkles. Turned off when the device is set to reduce motion.
 - **Ranks:** every 150 XP you climb a rank, each with a shiny badge: 🥈 Silver → 🥇 Gold → 💠 Platinum → 💎 Diamond. My rewards shows the whole ladder.
-- **Fun stuff:** XP, levels, 15 badges (including 📈 Future Investor), saving streaks, a daily treasure chest, a mascot you can poke, and sounds and phone buzzes (can be turned off).
+- **Fun stuff:** XP, levels, 15 badges (including 📈 Future Investor), saving streaks, a mascot you can poke, and sounds and phone buzzes (can be turned off).
 - **Note:** MyMoney teaches money basics. It isn't financial advice, and the investing examples say real returns go up and down.
 - **⚙️ Settings:** Kids/Teen mode, change your look, sounds, money type, add or switch players, start over.
 
@@ -66,7 +66,7 @@ js/content.js       categories, badges, lessons, tips, jokes (edit text here)
 js/store.js         saved data, money maths, XP & badges
 js/ui.js            formatting, charts, pop-ups, confetti, King Midas SVG
 js/screens-kid.js   home, the 3 worlds, lessons, rewards, settings
-js/fun.js           sounds, coin drops, treasure chest, guided tour
+js/fun.js           sounds, coin drops, guided tour
 js/onboarding.js    sign-up (nickname + Kids/Teens)
 js/app.js           page switching and taps
 serve.ps1           optional local web server
